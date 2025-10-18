@@ -1,0 +1,80 @@
+# FastAPI 服务配置
+
+# 服务器配置
+server:
+  host: "0.0.0.0"
+  port: 8000
+  reload: true
+  log_level: "info"
+  workers: 1
+
+# 模型配置
+models:
+  models_dir: "models"
+  default_model: "default_model.joblib"
+
+  # 支持的模型列表
+  available_models:
+    - name: "random_forest"
+      path: "models/random_forest_model.joblib"
+      description: "Random Forest Classifier"
+
+    - name: "xgboost"
+      path: "models/xgboost_model.joblib"
+      description: "XGBoost Classifier"
+
+    - name: "logistic_regression"
+      path: "models/logistic_regression_model.joblib"
+      description: "Logistic Regression"
+
+# 数据验证配置
+validation:
+  strict_mode: false  # 是否启用严格验证
+  required_fields:
+    - "player_id"
+    - "age"
+    - "position"
+    - "height"
+    - "weight"
+
+# 特征工程配置
+features:
+  auto_feature_engineering: true
+  feature_config_path: "configs/feature_config.yaml"
+
+# 预测配置
+prediction:
+  default_threshold: 0.5
+  risk_levels:
+    low: [0.0, 0.3]
+    medium: [0.3, 0.7]
+    high: [0.7, 1.0]
+
+  # 推荐生成
+  recommendations:
+    enabled: true
+    max_recommendations: 5
+
+# 批量处理配置
+batch:
+  max_batch_size: 1000
+  chunk_size: 100
+  timeout_seconds: 300
+
+# 安全配置
+security:
+  enable_auth: false  # 开发环境设置为false
+  demo_token: "demo-token"
+  cors_origins: ["*"]
+
+# 监控配置
+monitoring:
+  enable_metrics: true
+  log_predictions: true
+  max_log_entries: 10000
+
+# 缓存配置
+cache:
+  enable_caching: false
+  cache_ttl: 3600  # 秒
+  max_cache_size: 1000

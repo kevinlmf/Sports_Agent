@@ -1,0 +1,50 @@
+# Sports Injury Risk Prediction Evaluation Configuration
+
+# 评估数据配置
+evaluation:
+  data:
+    type: "synthetic"  # csv, synthetic
+    # path: "data/test_injury_data.csv"  # 如果使用CSV文件
+    target_column: "injury_risk"
+    n_samples: 500  # 仅用于合成数据
+
+  # 敏感特征（用于公平性分析）
+  sensitive_features:
+    - "position"
+    - "age_group"  # 需要在特征工程中创建
+
+# 分析类型
+analysis_types:
+  basic_evaluation: true
+  calibration_analysis: true
+  interpretability_analysis: true
+  fairness_analysis: true
+  robustness_analysis: true
+
+# 校准分析配置
+calibration:
+  methods: ["platt", "isotonic", "beta"]
+  n_bins: 10
+  strategy: "uniform"
+
+# 可解释性分析配置
+interpretability:
+  methods: ["shap", "feature_importance", "permutation"]
+  max_features_display: 20
+  sample_size: 1000  # SHAP分析的样本数
+
+# 公平性分析配置
+fairness:
+  sensitive_attributes: ["position"]
+  metrics: ["statistical_parity", "equalized_odds"]
+
+# 鲁棒性分析配置
+robustness:
+  noise_levels: [0.01, 0.05, 0.1, 0.2]
+  n_bootstrap: 1000
+
+# 输出配置
+output:
+  generate_plots: true
+  save_predictions: true
+  create_html_report: true

@@ -1,0 +1,25 @@
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_setup.py:_flush():81] Current SDK version is 0.22.2
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_setup.py:_flush():81] Configure stats pid to 43112
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_setup.py:_flush():81] Loading settings from /Users/mengfanlong/.config/wandb/settings
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_setup.py:_flush():81] Loading settings from /Users/mengfanlong/Downloads/System/MLE/Engine/Sports_Injury_Risk/wandb/settings
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_init.py:setup_run_log_directory():705] Logging user logs to /Users/mengfanlong/Downloads/System/MLE/Engine/Sports_Injury_Risk/wandb/offline-run-20251017_165131-34h3cwfd/logs/debug.log
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_init.py:setup_run_log_directory():706] Logging internal logs to /Users/mengfanlong/Downloads/System/MLE/Engine/Sports_Injury_Risk/wandb/offline-run-20251017_165131-34h3cwfd/logs/debug-internal.log
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_init.py:init():832] calling init triggers
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_init.py:init():837] wandb.init called with sweep_config: {}
+config: {'model': 'TransCHIME', 'learning_rate': 0.001, 'batch_size': 32, 'epochs': 10, '_wandb': {}}
+2025-10-17 16:51:31,084 INFO    MainThread:43112 [wandb_init.py:init():880] starting backend
+2025-10-17 16:51:31,711 INFO    MainThread:43112 [wandb_init.py:init():883] sending inform_init request
+2025-10-17 16:51:31,741 INFO    MainThread:43112 [wandb_init.py:init():891] backend started and connected
+2025-10-17 16:51:31,743 INFO    MainThread:43112 [wandb_init.py:init():961] updated telemetry
+2025-10-17 16:51:31,755 INFO    MainThread:43112 [wandb_init.py:init():985] communicating run to backend with 90.0 second timeout
+2025-10-17 16:51:32,069 INFO    MainThread:43112 [wandb_init.py:init():1036] starting run threads in backend
+2025-10-17 16:51:32,355 INFO    MainThread:43112 [wandb_run.py:_console_start():2509] atexit reg
+2025-10-17 16:51:32,355 INFO    MainThread:43112 [wandb_run.py:_redirect():2357] redirect: wrap_raw
+2025-10-17 16:51:32,356 INFO    MainThread:43112 [wandb_run.py:_redirect():2426] Wrapping output streams.
+2025-10-17 16:51:32,356 INFO    MainThread:43112 [wandb_run.py:_redirect():2449] Redirects installed.
+2025-10-17 16:51:32,358 INFO    MainThread:43112 [wandb_init.py:init():1076] run started, returning control to user process
+2025-10-17 16:51:32,360 INFO    MainThread:43112 [wandb_run.py:_finish():2275] finishing run sports-injury-risk/34h3cwfd
+2025-10-17 16:51:32,360 INFO    MainThread:43112 [wandb_run.py:_atexit_cleanup():2474] got exitcode: 0
+2025-10-17 16:51:32,360 INFO    MainThread:43112 [wandb_run.py:_restore():2456] restore
+2025-10-17 16:51:32,360 INFO    MainThread:43112 [wandb_run.py:_restore():2462] restore done

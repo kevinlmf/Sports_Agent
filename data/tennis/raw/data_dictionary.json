@@ -1,0 +1,66 @@
+{
+  "dataset": "Tennis Player Injury Risk Data",
+  "description": "Comprehensive tennis player data including match statistics, training load, physiological metrics, and injury history",
+  "date_created": "2025-10-17 16:34:28",
+  "total_players": 200,
+  "total_features": 54,
+  "target_variable": "injury_risk_label",
+  "high_risk_count": 5,
+  "low_risk_count": 195,
+  "features": {
+    "basic_info": [
+      "player_id",
+      "name",
+      "age",
+      "gender",
+      "height_cm",
+      "weight_kg",
+      "country"
+    ],
+    "career_stats": [
+      "years_pro",
+      "current_ranking",
+      "highest_ranking",
+      "career_prize_money"
+    ],
+    "match_data": [
+      "matches_played_12m",
+      "matches_won_12m",
+      "tournaments_played_12m",
+      "grand_slams_played_12m"
+    ],
+    "training_data": [
+      "training_hours_per_week",
+      "court_time_hours_per_week",
+      "gym_time_hours_per_week"
+    ],
+    "workload": [
+      "acute_workload",
+      "chronic_workload",
+      "ac_ratio",
+      "training_strain"
+    ],
+    "physiology": [
+      "resting_heart_rate",
+      "max_heart_rate",
+      "vo2_max",
+      "body_fat_percentage"
+    ],
+    "injury_history": [
+      "previous_injuries_count",
+      "days_injured_12m",
+      "injury_types",
+      "time_since_last_injury_days"
+    ],
+    "recovery": [
+      "avg_sleep_hours",
+      "sleep_quality_score",
+      "stress_level",
+      "fatigue_score"
+    ],
+    "target": [
+      "injury_risk_score",
+      "injury_risk_label"
+    ]
+  }
+}
