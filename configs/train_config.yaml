@@ -68,13 +68,6 @@ models:
       max_depth: [3, 6, 9]
       learning_rate: [0.01, 0.1, 0.2]
 
-# 超参数调优
-hyperparameter_tuning:
-  enabled: false
-  cv: 5
-  scoring: "roc_auc"
-  n_jobs: -1
-
 # 评估配置
 evaluation:
   metrics: ["auc_roc", "auc_pr", "f1", "precision", "recall", "accuracy"]

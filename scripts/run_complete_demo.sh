@@ -39,16 +39,12 @@ print_error() {
 # Main Execution
 ################################################################################
 
-print_header "Sports Injury Risk Prediction - Seven Dimensions Demo"
+print_header "Multi-Agent Sports Health Management System Demo"
 
-echo "This demo covers all key system capabilities:"
-echo "  1️⃣  Algorithm Coverage (Traditional + DL + Multimodal)"
-echo "  2️⃣  Architecture Integrity (Unified Interface)"
-echo "  3️⃣  Distributed Training (Multi-GPU Support)"
-echo "  4️⃣  MLOps Support (MLflow + W&B + Profiling)"
-echo "  5️⃣  API / Deployment (FastAPI + Docker + K8s)"
-echo "  6️⃣  Enterprise Features (Interpretability + Risk)"
-echo "  7️⃣  Research Extensions (Roadmap)"
+echo "This demo covers key system capabilities:"
+echo "  1️⃣  Multi-Agent System (Body Analysis, Exercise Plan, Injury Prevention, Wellness)"
+echo "  2️⃣  API / Deployment (FastAPI)"
+echo "  3️⃣  Agent Orchestration"
 echo ""
 echo "Plus comprehensive experiments:"
 echo "  📊 Data Analysis & Visualization"
@@ -202,258 +198,33 @@ print('    • CPU Offloading')
 "
 
 ################################################################################
-# Dimension 4: MLOps Support
+# API
 ################################################################################
-print_dim "4️⃣  MLOps Support - Experiment Tracking & Profiling" \
-          "configs/multimodal_train_config.yaml"
+print_dim "API - Multi-Agent System" \
+          "src/api/main.py"
 
-echo "MLOps Stack:"
+echo "API Endpoints:"
+echo ""
+echo "POST /api/v2/analyze          - Complete multi-agent analysis"
+echo "POST /api/v2/agents/{name}    - Single agent analysis"
+echo "GET  /api/v2/agents           - List all agents"
+echo "GET  /api/v2/workflow/history - Workflow history"
+echo "GET  /health                  - Health check"
 echo ""
 
-# Check MLflow
-echo "1. Experiment Tracking:"
 python -c "
 import sys
 try:
-    import mlflow
-    print('  ✓ MLflow installed (version: {})'.format(mlflow.__version__))
-    print('    • Experiment tracking')
-    print('    • Model registry')
-    print('    • Artifact storage')
+    import fastapi
+    print('  ✓ FastAPI available')
 except ImportError:
-    print('  ⚙️  MLflow not installed (pip install mlflow)')
+    print('  ⚙️  FastAPI (pip install fastapi uvicorn)')
 "
 
-echo ""
-
-# Check W&B
-python -c "
-import sys
-try:
-    import wandb
-    print('  ✓ Weights & Biases installed (version: {})'.format(wandb.__version__))
-    print('    • Real-time visualization')
-    print('    • Hyperparameter tuning')
-    print('    • Model versioning')
-except ImportError:
-    print('  ⚙️  W&B not installed (pip install wandb)')
-"
-
-echo ""
-echo "2. Model Versioning & Registry:"
-echo "  • Git-based version control"
-echo "  • Model checkpoint management"
-echo "  • Experiment reproducibility"
-
-echo ""
-echo "3. Profiling & Monitoring:"
-python -c "
-import sys
-try:
-    import torch.profiler
-    print('  ✓ PyTorch Profiler available')
-    print('    • CPU/GPU utilization')
-    print('    • Memory profiling')
-    print('    • Bottleneck detection')
-except:
-    print('  ⚙️  PyTorch Profiler')
-"
-
-echo ""
-echo "4. CI/CD Integration:"
-echo "  • Automated testing (pytest)"
-echo "  • Code quality checks"
-echo "  • Model validation pipeline"
-
-print_status "MLOps infrastructure documented"
+print_status "API endpoints defined"
 
 ################################################################################
-# Dimension 5: API / Deployment
-################################################################################
-print_dim "5️⃣  API / Deployment - Production Ready" \
-          "src/inference/ (planned)"
-
-echo "Deployment Architecture:"
-echo ""
-
-echo "1. API Service (FastAPI):"
-cat << 'EOF'
-  Endpoints:
-    POST /predict          - Single prediction
-    POST /batch_predict    - Batch predictions
-    GET  /model_info       - Model metadata
-    GET  /health          - Health check
-EOF
-
-echo ""
-echo "2. Model Serving:"
-python -c "
-import sys
-try:
-    import torch
-    print('  ✓ PyTorch (native serving)')
-    try:
-        import onnx
-        import onnxruntime
-        print('  ✓ ONNX Runtime (optimized inference)')
-    except:
-        print('  ⚙️  ONNX Runtime (pip install onnx onnxruntime)')
-    try:
-        import tritonclient
-        print('  ✓ Triton Inference Server')
-    except:
-        print('  ⚙️  Triton Inference Server')
-except:
-    pass
-"
-
-echo ""
-echo "3. Docker Containerization:"
-if [ -f "Dockerfile" ]; then
-    print_status "Dockerfile available"
-else
-    echo "  Dockerfile (to be created):"
-    echo "    • Base: pytorch/pytorch:2.0-cuda11.8"
-    echo "    • Multi-stage build"
-    echo "    • Optimized layers"
-fi
-
-echo ""
-echo "4. Orchestration:"
-if [ -f "k8s/deployment.yaml" ]; then
-    print_status "Kubernetes manifests available"
-else
-    echo "  Kubernetes deployment (planned):"
-    echo "    • Horizontal Pod Autoscaling"
-    echo "    • Load balancing"
-    echo "    • Rolling updates"
-fi
-
-echo ""
-echo "5. Monitoring:"
-echo "  • Prometheus metrics"
-echo "  • Grafana dashboards"
-echo "  • Alert management"
-
-print_status "Deployment architecture defined"
-
-################################################################################
-# Dimension 6: Enterprise Features
-################################################################################
-print_dim "6️⃣  Enterprise Features - Interpretability & Risk Management" \
-          "src/interpretability/explainability.py"
-
-echo "Interpretability Tools:"
-echo ""
-
-echo "1. Model Explainability:"
-python -c "
-import sys
-try:
-    import shap
-    print('  ✓ SHAP (SHapley Additive exPlanations)')
-    print('    • Feature importance')
-    print('    • Global interpretability')
-    print('    • Individual predictions')
-except ImportError:
-    print('  ⚙️  SHAP (pip install shap)')
-
-print()
-try:
-    import captum
-    print('  ✓ Captum (PyTorch interpretability)')
-    print('    • Integrated Gradients')
-    print('    • Grad-CAM')
-    print('    • Attention visualization')
-except ImportError:
-    print('  ⚙️  Captum (pip install captum)')
-"
-
-echo ""
-echo "2. Attention Visualization:"
-echo "  • Cross-modal attention heatmaps"
-echo "  • Self-attention patterns"
-echo "  • Feature interaction analysis"
-
-echo ""
-echo "3. Risk Assessment:"
-echo "  • Confidence intervals"
-echo "  • Uncertainty quantification"
-echo "  • Calibration metrics"
-
-echo ""
-echo "4. Fairness & Bias:"
-echo "  • Demographic parity analysis"
-echo "  • Equal opportunity metrics"
-echo "  • Bias mitigation strategies"
-
-echo ""
-echo "5. Model Validation:"
-python -c "
-from src.core.metrics import compute_auc_roc
-from src.core.calibration import plot_calibration_curve
-print('  ✓ Metrics: AUC-ROC, F1, Precision, Recall')
-print('  ✓ Calibration: Reliability diagrams')
-print('  ✓ Clinical metrics: Sensitivity, Specificity')
-"
-
-print_status "Enterprise features documented"
-
-################################################################################
-# Dimension 7: Research Extensions
-################################################################################
-print_dim "7️⃣  Research Extensions - Future Roadmap" \
-          "docs/DL_EXPANSION_PLAN.md"
-
-cat << 'EOF'
-📋 Active Research Directions:
-
-1. Vision-Language Models (VLMs)
-   ✅ CLIP-based multimodal fusion
-   ✅ Cross-attention mechanisms
-   🔄 Video sequence analysis
-
-2. Parameter-Efficient Fine-Tuning
-   ✅ LoRA adapters (91.5% parameter reduction)
-   ✅ Knowledge distillation
-   🔄 Adapter fusion strategies
-
-3. Transformer Architectures
-   ✅ Transformer implementation
-   ✅ Self-attention for temporal patterns
-   🔄 Sparse attention for long sequences
-
-4. Multimodal Learning
-   ✅ Vision + Text + Tabular fusion
-   ✅ Early/Late fusion strategies
-   🔄 Modality-specific adapters
-
-5. Continual Learning
-   🚀 Online adaptation to new injury patterns
-   🚀 Catastrophic forgetting mitigation
-   🚀 Experience replay mechanisms
-
-6. Causal Inference
-   🚀 Structural causal models (SCM)
-   🚀 Treatment effect estimation
-   🚀 Counterfactual reasoning
-
-7. Federated Learning
-   🚀 Privacy-preserving training
-   🚀 Multi-hospital collaboration
-   🚀 Secure aggregation protocols
-
-Legend:
-  ✅ = Implemented & Tested
-  🔄 = In Progress
-  🚀 = Planned
-
-EOF
-
-print_status "Research roadmap documented"
-
-################################################################################
-# NEW: Data Analysis & Visualization
+# Data Analysis & Visualization
 ################################################################################
 print_header "Data Analysis & Visualization"
 
@@ -535,13 +306,9 @@ cat << 'EOF'
 ├─────────────────────────────────────────────────────────────────────┤
 │ Dimension                 │ Status │ Key Component                  │
 ├───────────────────────────┼────────┼────────────────────────────────┤
-│ 1️⃣  Algorithm Coverage    │   ✅   │ Traditional + DL + Multimodal  │
-│ 2️⃣  Architecture          │   ✅   │ Unified Interface              │
-│ 3️⃣  Distributed Training  │   ⚙️   │ Multi-GPU Ready                │
-│ 4️⃣  MLOps Support         │   ✅   │ MLflow + W&B                   │
-│ 5️⃣  API / Deployment      │   🔄   │ FastAPI + Docker               │
-│ 6️⃣  Enterprise Features   │   ✅   │ SHAP + Grad-CAM                │
-│ 7️⃣  Research Extensions   │   🚀   │ VLM + LoRA Adapters            │
+│ Multi-Agent System         │   ✅   │ 4 Specialized Agents           │
+│ API / Deployment           │   ✅   │ FastAPI REST API               │
+│ Agent Orchestration        │   ✅   │ Workflow Management             │
 └─────────────────────────────────────────────────────────────────────┘
 
 Performance Benchmarks (Target Metrics):

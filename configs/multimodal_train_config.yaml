@@ -143,32 +143,11 @@ distributed:
   world_size: 1
   local_rank: 0
 
-  # Ray Tune (hyperparameter search)
-  use_ray_tune: false
-  ray_num_samples: 20
-  ray_scheduler: 'asha'   # Options: 'asha', 'pbt', 'hyperband'
 
 # ========================================
-# EXPERIMENT TRACKING CONFIGURATION
+# LOGGING CONFIGURATION
 # ========================================
-tracking:
-  # General
-  experiment_name: 'sports_injury_vlm'
-  run_name: 'vlm_lora_v1'
-
-  # MLflow
-  use_mlflow: true
-  mlflow_tracking_uri: 'http://localhost:5000'
-  mlflow_experiment_name: 'sports_injury_risk'
-
-  # Weights & Biases
-  use_wandb: false
-  wandb_project: 'sports_injury_risk'
-  wandb_entity: 'your_username'
-  wandb_watch_model: true
-  wandb_log_frequency: 10
-
-  # Logging
+logging:
   log_interval: 10        # Log every N batches
   eval_interval: 1        # Evaluate every N epochs
   save_interval: 5        # Save checkpoint every N epochs
@@ -225,15 +204,6 @@ inference:
   # Batch inference
   inference_batch_size: 64
 
-  # Export formats
-  export_onnx: false
-  export_torchscript: false
-  onnx_opset_version: 14
-
-  # Deployment
-  deploy_api: false
-  api_host: '0.0.0.0'
-  api_port: 8000
 
 # ========================================
 # COMPUTATIONAL RESOURCES
@@ -243,9 +213,6 @@ compute:
   device: 'cuda'          # Options: 'cuda', 'cpu', 'mps'
   gpu_ids: [0]            # GPU device IDs
 
-  # Memory optimization
-  use_gradient_checkpointing: false
-  empty_cache_freq: 10    # Empty CUDA cache every N batches
 
   # Precision
   precision: 'fp16'       # Options: 'fp32', 'fp16', 'bf16'
@@ -272,7 +239,6 @@ debug:
 # CUSTOM CONFIGURATION
 # ========================================
 custom:
-  # Add any custom hyperparameters here
   use_custom_loss: false
   custom_param_1: 0.5
   custom_param_2: 'value'

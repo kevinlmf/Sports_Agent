@@ -1,6 +1,6 @@
 """
 FastAPI Main Application Module
-Provides REST API interface for sports injury risk prediction
+Provides REST API interface for Multi-Agent Sports Health Management System
 """
 
 from typing import List, Dict, Any, Optional, Union
@@ -25,6 +25,7 @@ from ..core.metrics import MetricsCalculator
 from ..data.loader import DataLoader
 from ..data.features import FeatureEngineer
 from ..data.validate import DataValidator
+from ..agents import AgentOrchestrator, UserContext
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -32,9 +33,9 @@ logger = logging.getLogger(__name__)
 
 # Create FastAPI application
 app = FastAPI(
-    title="Sports Injury Risk Prediction API",
-    description="API for predicting sports injury risk using machine learning models",
-    version="1.0.0",
+    title="Multi-Agent Sports Health Management API",
+    description="Multi-agent system for sports health management: body analysis, exercise planning, injury prevention, and wellness analysis",
+    version="2.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
 )
@@ -55,6 +56,9 @@ security = HTTPBearer(auto_error=False)
 loaded_models: Dict[str, Any] = {}
 feature_engineer: Optional[FeatureEngineer] = None
 data_validator: Optional[DataValidator] = None
+
+# Multi-Agent System
+agent_orchestrator: Optional[AgentOrchestrator] = None
 
 
 # Pydantic model definitions
@@ -213,9 +217,10 @@ def generate_recommendations(risk_score: float, contributing_factors: Dict[str, 
 async def root():
     """根端点"""
     return {
-        "message": "Sports Injury Risk Prediction API",
-        "version": "1.0.0",
-        "docs_url": "/docs"
+        "message": "Multi-Agent Sports Health Management API",
+        "version": "2.0.0",
+        "docs_url": "/docs",
+        "agents": ["BodyAnalysisAgent", "ExercisePlanAgent", "InjuryPreventionAgent", "WellnessAnalysisAgent"]
     }
 
 
@@ -460,11 +465,172 @@ async def download_results(prediction_id: str):
     raise HTTPException(status_code=501, detail="Download functionality not implemented yet")
 
 
+# Multi-Agent API Endpoints
+
+class UserInput(BaseModel):
+    """用户输入数据模型"""
+    user_id: str = Field(..., description="用户ID")
+    age: int = Field(..., ge=0, le=120, description="年龄")
+    gender: str = Field(..., description="性别 (male/female)")
+    height: float = Field(..., gt=0, le=300, description="身高 (cm)")
+    weight: float = Field(..., gt=0, le=300, description="体重 (kg)")
+    fitness_level: str = Field(default="beginner", description="健身水平 (beginner/intermediate/advanced)")
+    health_conditions: List[str] = Field(default_factory=list, description="健康问题列表")
+    injury_history: List[Dict[str, Any]] = Field(default_factory=list, description="损伤历史")
+    fitness_goals: List[str] = Field(default_factory=list, description="健身目标")
+    preferences: Dict[str, Any] = Field(default_factory=dict, description="用户偏好")
+
+
+class CompleteAnalysisResponse(BaseModel):
+    """完整分析响应"""
+    workflow_id: str
+    user_id: str
+    timestamp: str
+    agents: Dict[str, Any]
+    summary: Dict[str, Any]
+    recommendations: List[str]
+    overall_confidence: float
+
+
+@app.post("/api/v2/analyze", response_model=CompleteAnalysisResponse)
+async def complete_analysis(user_input: UserInput):
+    """
+    执行完整的多智能体分析
+    
+    包括：
+    - 身体情况分析
+    - 运动方案推荐
+    - 损伤预防建议
+    - 身心健康评估
+    """
+    global agent_orchestrator
+    
+    if agent_orchestrator is None:
+        raise HTTPException(status_code=503, detail="Agent orchestrator not initialized")
+    
+    try:
+        # 创建用户上下文
+        user_context = UserContext(
+            user_id=user_input.user_id,
+            age=user_input.age,
+            gender=user_input.gender,
+            height=user_input.height,
+            weight=user_input.weight,
+            fitness_level=user_input.fitness_level,
+            health_conditions=user_input.health_conditions,
+            injury_history=user_input.injury_history,
+            fitness_goals=user_input.fitness_goals,
+            preferences=user_input.preferences
+        )
+        
+        # 执行完整分析
+        results = agent_orchestrator.process_complete_analysis(user_context)
+        
+        return CompleteAnalysisResponse(**results)
+        
+    except Exception as e:
+        logger.error(f"Error in complete analysis: {e}")
+        raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+
+
+@app.post("/api/v2/agents/{agent_name}")
+async def single_agent_analysis(agent_name: str, user_input: UserInput):
+    """
+    执行单个agent的分析
+    
+    Available agents:
+    - body_analysis: 身体分析
+    - exercise_plan: 运动方案
+    - injury_prevention: 损伤预防
+    - wellness_analysis: 身心健康分析
+    """
+    global agent_orchestrator
+    
+    if agent_orchestrator is None:
+        raise HTTPException(status_code=503, detail="Agent orchestrator not initialized")
+    
+    if agent_name not in agent_orchestrator.agents:
+        raise HTTPException(status_code=404, detail=f"Agent {agent_name} not found")
+    
+    try:
+        user_context = UserContext(
+            user_id=user_input.user_id,
+            age=user_input.age,
+            gender=user_input.gender,
+            height=user_input.height,
+            weight=user_input.weight,
+            fitness_level=user_input.fitness_level,
+            health_conditions=user_input.health_conditions,
+            injury_history=user_input.injury_history,
+            fitness_goals=user_input.fitness_goals,
+            preferences=user_input.preferences
+        )
+        
+        response = agent_orchestrator.process_single_agent(agent_name, user_context)
+        
+        return {
+            "agent_name": response.agent_name,
+            "success": response.success,
+            "data": response.data,
+            "confidence": response.confidence,
+            "reasoning": response.reasoning,
+            "recommendations": response.recommendations,
+            "timestamp": response.timestamp.isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in single agent analysis: {e}")
+        raise HTTPException(status_code=500, detail=f"Agent analysis failed: {str(e)}")
+
+
+@app.get("/api/v2/agents")
+async def list_agents():
+    """列出所有可用的agents及其能力"""
+    global agent_orchestrator
+    
+    if agent_orchestrator is None:
+        raise HTTPException(status_code=503, detail="Agent orchestrator not initialized")
+    
+    capabilities = agent_orchestrator.get_agent_capabilities()
+    return {
+        "agents": list(capabilities.keys()),
+        "capabilities": capabilities
+    }
+
+
+@app.get("/api/v2/workflow/history")
+async def get_workflow_history(limit: int = 10):
+    """获取工作流历史"""
+    global agent_orchestrator
+    
+    if agent_orchestrator is None:
+        raise HTTPException(status_code=503, detail="Agent orchestrator not initialized")
+    
+    history = agent_orchestrator.get_workflow_history(limit=limit)
+    return {
+        "history": history,
+        "count": len(history)
+    }
+
+
 @app.on_event("startup")
 async def startup_event():
     """应用启动事件"""
-    logger.info("Starting Sports Injury Risk Prediction API...")
+    global agent_orchestrator
+    
+    logger.info("Starting Multi-Agent Sports Health Management API...")
+    
+    # 加载传统模型（向后兼容）
     load_models()
+    
+    # 初始化多智能体系统
+    try:
+        agent_orchestrator = AgentOrchestrator()
+        logger.info("Multi-agent system initialized successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize agent orchestrator: {e}")
+        logger.warning("API will continue without multi-agent system")
+    
     logger.info("API startup complete")
 
 

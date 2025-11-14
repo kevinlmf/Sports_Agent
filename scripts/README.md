@@ -1,218 +1,104 @@
-# Sports Injury Risk Prediction - Demo Scripts
+# Multi-Agent Sports Health Management - Demo Scripts
 
-This directory contains comprehensive demonstration scripts showcasing all seven dimensions of the Sports Injury Risk Prediction system.
+This directory contains demonstration scripts for the Multi-Agent Sports Health Management System.
 
 ## 📋 Overview
 
-The complete demo system covers:
+The system features:
 
-1. **Algorithm Coverage** - Traditional, DL, and Multimodal methods
-2. **Architecture Integrity** - Unified interface across all components
-3. **Distributed Training** - Multi-GPU support with DeepSpeed/Ray
-4. **MLOps Support** - Experiment tracking and profiling
-5. **API/Deployment** - Production-ready FastAPI service
-6. **Enterprise Features** - Interpretability and risk management
-7. **Research Extensions** - Future roadmap and capabilities
+1. **Multi-Agent System** - Four specialized agents working together
+2. **API/Deployment** - Production-ready FastAPI service
+3. **Agent Orchestration** - Workflow management and coordination
 
 ## 🚀 Quick Start
 
 ### Run Complete Demo
 
 ```bash
-# Run all seven dimensions
+# Run multi-agent system demo
 ./scripts/run_complete_demo.sh
 ```
-
-This will systematically test and demonstrate all system capabilities.
 
 ### Run Individual Demos
 
 ```bash
-# MLOps: Experiment tracking and profiling
-python scripts/demo_mlops.py
-
 # API: Deployment architecture
 python scripts/demo_api.py
 
 # Enterprise: Interpretability and validation
 python scripts/demo_enterprise.py
+
+# Test multi-agent system
+python examples/test_multi_agent.py
 ```
 
 ## 📁 Script Descriptions
 
 ### `run_complete_demo.sh`
-Master script that runs all seven dimension tests.
+Master script that demonstrates the multi-agent system capabilities.
 
 **Features:**
 - Color-coded output for easy reading
 - Progressive execution with status updates
-- Checks system capabilities (GPU, dependencies)
+- Checks system capabilities
 - Generates comprehensive summary report
 
 **Output:**
 - System status summary table
-- Performance benchmarks
+- Agent capabilities overview
 - Test coverage report
-- Next steps guidance
-
-### `demo_mlops.py`
-Demonstrates MLOps infrastructure and practices.
-
-**Components:**
-- **MLflow Integration**: Experiment tracking, model registry
-- **Weights & Biases**: Real-time visualization, hyperparameter tuning
-- **PyTorch Profiler**: Performance analysis, bottleneck detection
-- **Model Versioning**: Checkpoint management strategy
-- **Monitoring**: Production metrics and alerting
-
-**Usage:**
-```python
-python scripts/demo_mlops.py
-```
 
 ### `demo_api.py`
 Showcases production deployment architecture.
 
 **Components:**
-- **FastAPI Service**: REST API endpoints
-- **Request/Response Examples**: Multimodal inputs
-- **Docker Deployment**: Containerization strategy
-- **Kubernetes**: Orchestration and auto-scaling
-- **Model Optimization**: ONNX, TorchScript, quantization
+- **FastAPI Service**: REST API endpoints for multi-agent system
+- **Request/Response Examples**: User input and agent responses
+- **API Documentation**: Auto-generated Swagger docs
 
 **Usage:**
 ```python
 python scripts/demo_api.py
 ```
 
-### `demo_enterprise.py`
-Demonstrates enterprise-grade features.
+### `test_multi_agent.py`
+Tests the multi-agent system functionality.
 
 **Components:**
-- **SHAP Explainability**: Feature importance analysis
-- **Grad-CAM**: Visual interpretability for images
-- **Attention Visualization**: Cross-modal attention patterns
-- **Uncertainty Quantification**: Confidence intervals
-- **Model Calibration**: Reliability assessment
-- **Fairness Analysis**: Bias detection and mitigation
-- **Clinical Validation**: Medical metrics and thresholds
-- **Model Governance**: Documentation and compliance
+- Complete analysis workflow
+- Individual agent testing
+- Response validation
 
 **Usage:**
 ```python
-python scripts/demo_enterprise.py
+python examples/test_multi_agent.py
 ```
 
 ## 🎯 What Each Demo Shows
 
-### 1️⃣ Algorithm Coverage Demo
+### Multi-Agent System
 
-**Traditional Methods:**
-- ✅ CHIME Model
-- ✅ Logistic Regression
-- ✅ Random Forest
-- ✅ XGBoost
+**Agents:**
+- ✅ BodyAnalysisAgent - Body condition analysis
+- ✅ ExercisePlanAgent - Exercise plan recommendation
+- ✅ InjuryPreventionAgent - Injury risk prevention
+- ✅ WellnessAnalysisAgent - Mental and physical wellness analysis
 
-**Deep Learning Methods:**
-- ✅ TransCHIME (Transformer-based)
-- ✅ LSTM
-- ✅ GRU
-- ✅ Transformer
+**Orchestration:**
+- Workflow management
+- Agent coordination
+- Result aggregation
 
-**Multimodal Models:**
-- ✅ Vision-Language Model (CLIP + BERT)
-- ✅ LoRA Adapters
-
-### 2️⃣ Architecture Integrity Demo
-
-Shows unified interface across:
-- Data loading (`SportInjuryDataset`)
-- Feature engineering (`FeatureEngineer`)
-- Model interface (all models share common API)
-- Training pipeline (`Trainer`)
-- Evaluation metrics (`compute_auc_roc`, `calibration`)
-
-### 3️⃣ Distributed Training Demo
-
-**Strategies:**
-- Data Parallel (DistributedDataParallel)
-- Model Parallel (DeepSpeed ZeRO)
-- Pipeline Parallel
-- Hybrid Parallel
-
-**Optimizations:**
-- Gradient accumulation
-- Mixed precision (FP16/BF16)
-- Gradient checkpointing
-- CPU offloading
-
-### 4️⃣ MLOps Support Demo
-
-**Experiment Tracking:**
-- MLflow: Parameters, metrics, artifacts
-- W&B: Real-time dashboards, sweeps
-
-**Profiling:**
-- PyTorch Profiler: CPU/GPU utilization
-- Memory profiling
-- Bottleneck detection
-
-**Model Management:**
-- Version control
-- Checkpoint strategies
-- Model registry
-
-### 5️⃣ API/Deployment Demo
+### API/Deployment
 
 **API Endpoints:**
 ```
-POST /predict          - Single prediction
-POST /batch_predict    - Batch processing
-GET  /health          - Health check
-GET  /model_info      - Model metadata
+POST /api/v2/analyze          - Complete multi-agent analysis
+POST /api/v2/agents/{name}    - Single agent analysis
+GET  /api/v2/agents           - List all agents
+GET  /api/v2/workflow/history - Workflow history
+GET  /health                  - Health check
 ```
-
-**Deployment:**
-- Docker containerization
-- Kubernetes orchestration
-- Horizontal auto-scaling
-- ONNX optimization
-
-### 6️⃣ Enterprise Features Demo
-
-**Interpretability:**
-- SHAP feature importance
-- Grad-CAM visual heatmaps
-- Attention weight visualization
-
-**Validation:**
-- Uncertainty quantification
-- Model calibration (ECE, Brier score)
-- Fairness metrics (demographic parity)
-- Clinical metrics (sensitivity, specificity)
-
-**Governance:**
-- Model cards
-- Ethical considerations
-- Compliance documentation
-
-### 7️⃣ Research Extensions Demo
-
-**Implemented:**
-- ✅ Vision-Language Models
-- ✅ LoRA adapters
-- ✅ TransCHIME architecture
-- ✅ Multimodal fusion
-
-**In Progress:**
-- 🔄 Video sequence analysis
-- 🔄 Adapter fusion strategies
-- 🔄 Sparse attention
-
-**Planned:**
-- 🚀 Continual learning
-- 🚀 Causal inference
-- 🚀 Federated learning
 
 ## 📊 Expected Output
 
@@ -221,84 +107,50 @@ GET  /model_info      - Model metadata
 ┌─────────────────────────────────────────────────────────────────────┐
 │                      SYSTEM STATUS SUMMARY                          │
 ├─────────────────────────────────────────────────────────────────────┤
-│ Dimension                 │ Status │ Key Component                  │
-├───────────────────────────┼────────┼────────────────────────────────┤
-│ 1️⃣  Algorithm Coverage    │   ✅   │ Traditional + DL + Multimodal  │
-│ 2️⃣  Architecture          │   ✅   │ Unified Interface              │
-│ 3️⃣  Distributed Training  │   ⚙️   │ Multi-GPU Ready                │
-│ 4️⃣  MLOps Support         │   ✅   │ MLflow + W&B                   │
-│ 5️⃣  API / Deployment      │   🔄   │ FastAPI + Docker               │
-│ 6️⃣  Enterprise Features   │   ✅   │ SHAP + Grad-CAM                │
-│ 7️⃣  Research Extensions   │   🚀   │ VLM + LoRA + TransCHIME        │
+│ Component                │ Status │ Key Feature                     │
+├──────────────────────────┼────────┼─────────────────────────────────┤
+│ Multi-Agent System       │   ✅   │ 4 Specialized Agents            │
+│ API / Deployment         │   ✅   │ FastAPI REST API                 │
+│ Agent Orchestration      │   ✅   │ Workflow Management              │
 └─────────────────────────────────────────────────────────────────────┘
-```
-
-### Performance Benchmarks
-```
-┌───────────────────┬────────┬─────────┬──────────┬─────────┐
-│ Model             │ Params │ AUC-ROC │ Inference│ Memory  │
-├───────────────────┼────────┼─────────┼──────────┼─────────┤
-│ XGBoost (Baseline)│   2M   │  0.85   │   3ms    │  0.05GB │
-│ TransCHIME        │  10M   │  0.89   │  15ms    │  1.0GB  │
-│ VLM (Full)        │ 130M   │  0.93   │  50ms    │  2.0GB  │
-│ VLM + LoRA        │  11M   │  0.92   │  40ms    │  1.5GB  │
-└───────────────────┴────────┴─────────┴──────────┴─────────┘
 ```
 
 ## 🔧 Prerequisites
 
 ### Required Dependencies
 ```bash
-# Core ML
-pip install torch torchvision transformers
-
-# Multimodal
-pip install peft bitsandbytes
-
-# Interpretability
-pip install shap captum
+# Core
+pip install fastapi uvicorn pydantic
 
 # Data processing
-pip install pandas numpy scikit-learn
-
-# Optional: MLOps
-pip install mlflow wandb
+pip install pandas numpy
 ```
 
 ### System Requirements
 - Python 3.8+
-- 8GB+ RAM (16GB+ recommended for multimodal models)
-- GPU optional but recommended (CUDA 11.8+ if using GPU)
+- 4GB+ RAM
 
 ## 📝 Usage Examples
 
 ### Basic Demo Run
 ```bash
-# Quick test - individual components
-python scripts/demo_mlops.py
+# Quick test - multi-agent system
+python examples/test_multi_agent.py
+
+# API demo
 python scripts/demo_api.py
-python scripts/demo_enterprise.py
 
 # Full system demo
 ./scripts/run_complete_demo.sh
 ```
 
-### With Dependencies Check
+### Start API Server
 ```bash
-# Install dependencies first
-pip install -r requirements.txt
+# Start FastAPI server
+uvicorn src.api.main:app --reload --port 8000
 
-# Run demo
-./scripts/run_complete_demo.sh
-```
-
-### Customize Output
-```bash
-# Run specific dimensions only
-# Edit run_complete_demo.sh and comment out sections you want to skip
-
-# Example: Skip distributed training demo
-# Just comment out the "Dimension 3" section
+# Access API docs
+# http://localhost:8000/docs
 ```
 
 ## 🐛 Troubleshooting
@@ -306,17 +158,12 @@ pip install -r requirements.txt
 ### Script Permission Error
 ```bash
 chmod +x scripts/run_complete_demo.sh
-chmod +x scripts/demo_*.py
 ```
 
 ### Missing Dependencies
 ```bash
-pip install torch transformers peft shap captum
+pip install fastapi uvicorn pydantic pandas numpy
 ```
-
-### GPU Not Detected
-- The demo will automatically fall back to CPU mode
-- Multi-GPU features will be skipped with appropriate messages
 
 ### Import Errors
 - Ensure you're running from the project root directory
@@ -325,47 +172,42 @@ pip install torch transformers peft shap captum
 ## 📚 Related Documentation
 
 - **README.md** - Main project overview
-- **docs/MULTIMODAL_SYSTEM_ARCHITECTURE.md** - Complete architecture
-- **docs/DL_EXPANSION_PLAN.md** - Research roadmap
-- **PROJECT_STRUCTURE.md** - Directory structure
-- **examples/chime_example.py** - CHIME usage example
-- **examples/quick_start.py** - Quick start guide
+- **examples/test_multi_agent.py** - Multi-agent system test
+- **examples/multi_agent_usage.py** - Usage examples
 
 ## 🎓 Learning Path
 
 **Beginners:**
-1. Run `./scripts/run_complete_demo.sh` to see overview
-2. Study `demo_enterprise.py` for interpretability basics
-3. Explore `examples/chime_example.py` for hands-on training
+1. Run `python examples/test_multi_agent.py` to see agents in action
+2. Study `src/agents/` for agent implementation
+3. Explore API endpoints at `http://localhost:8000/docs`
 
 **Intermediate:**
-1. Deep dive into `demo_mlops.py` for experiment tracking
-2. Review `demo_api.py` for deployment patterns
-3. Study docs/MULTIMODAL_SYSTEM_ARCHITECTURE.md
+1. Review `src/agents/orchestrator.py` for workflow management
+2. Study individual agent implementations
+3. Customize agent behavior via configuration
 
 **Advanced:**
-1. Implement custom distributed training strategies
-2. Extend multimodal fusion architectures
-3. Contribute to research extensions roadmap
+1. Create custom agents by extending `BaseAgent`
+2. Implement new agent capabilities
+3. Extend orchestrator with custom workflows
 
 ## 🤝 Contributing
 
 If you add new features, please update the corresponding demo script:
-- New models → Update Algorithm Coverage section
-- New interpretability → Update `demo_enterprise.py`
-- New deployment → Update `demo_api.py`
-- New MLOps tools → Update `demo_mlops.py`
+- New agents → Update agent tests
+- New API endpoints → Update `demo_api.py`
+- New workflows → Update orchestrator tests
 
 ## 📧 Support
 
 For issues or questions:
-1. Check this README and related docs
-2. Review demo script output for hints
-3. Inspect script source code for implementation details
-4. Check project documentation in `docs/`
+1. Check this README and main README.md
+2. Review example scripts for usage patterns
+3. Inspect source code in `src/agents/`
 
 ---
 
-**Last Updated:** 2025-10-17
-**Status:** ✅ All demos functional
-**Version:** 1.0.0
+**Last Updated:** 2025-01-17
+**Status:** ✅ Multi-agent system functional
+**Version:** 2.0.0

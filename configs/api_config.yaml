@@ -66,15 +66,3 @@ security:
   enable_auth: false  # 开发环境设置为false
   demo_token: "demo-token"
   cors_origins: ["*"]
-
-# 监控配置
-monitoring:
-  enable_metrics: true
-  log_predictions: true
-  max_log_entries: 10000
-
-# 缓存配置
-cache:
-  enable_caching: false
-  cache_ttl: 3600  # 秒
-  max_cache_size: 1000
