@@ -22,17 +22,7 @@ AgentOrchestrator → Coordinate all agents
 Final Response (Comprehensive Health Analysis)
 ```
 
-### Key Agents
 
-1. **BodyAnalysisAgent**: Analyzes BMI, health risks, fitness level, nutrition status, and body composition
-
-2. **ExercisePlanAgent**: Generates personalized training plans based on user goals and fitness level
-
-3. **InjuryPreventionAgent**: Identifies injury risks and provides prevention measures
-
-4. **WellnessAnalysisAgent**: Assesses mental health, stress levels, sleep quality, and overall wellness
-
-5. **AgentOrchestrator**: Coordinates all agents, manages workflow, and aggregates results
 
 ## Key Features Explained
 
@@ -131,5 +121,11 @@ python examples/multi_agent_usage.py
 This project is licensed under the MIT License.
 
 ---
+### Disclaimer
+
+This system is for research and educational purposes only. It is not a medical device and must not be used for diagnosis or treatment. Please consult professionals for real medical or mental issues.
+
+---
 
 May we all stay unbroken — in body and in spirit. 💫
+
